@@ -1,10 +1,10 @@
 // Payment processing module
 function processPayment(amount, currency) {
-    const commission = 0.02; // 2% commission
-    const total = amount * (1 + commission);
+    const commission = rates[currency] || 0.02;
+    const total = amount + (amount * commission); // Изменили порядок операций
     return {
         amount: amount,
-        commission: amount * commission,
+        commission: commission, // БАГ: теперь возвращаем rate, а не сумму
         total: total,
         currency: currency
     };
